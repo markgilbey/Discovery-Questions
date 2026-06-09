@@ -329,7 +329,7 @@ const STEPS = [
   { id:"brand", kind:"brand", short:"Existing brand", n:"03",
     q:"What brand assets do you currently have?",
     help:"This changes everything downstream — whether we're extending an identity or building one. Tell us what exists, and add any files you'd like us to see.",
-    options:["Complete brand guide (logo, colors, fonts)","Logo and some visual assets","Logo only","No existing brand","Not sure — our old materials are a mess"],
+    options:["Complete brand guide (logo, colors, fonts)","Logo and some visual assets","Logo only","No existing brand","Not sure"],
     uploadLabel:"Drag brand assets here, or browse",
     uploadHint:"Logos, style guides, screenshots. We'll list them so you can attach them when you send." },
 
@@ -413,7 +413,7 @@ function answered(step){
   const v = state[step.id];
   switch(step.kind){
     case "single": case "scale": return v!=null && v!=="";
-    case "text": return step.optional ? true : !!(v&&v.trim());
+    case "text": return !!(v&&v.trim());
     case "list": return Array.isArray(v) && v.filter(x=>x&&x.trim()).length>0;
     case "multi": return Array.isArray(v?.sel) && v.sel.length>0;
     case "rated": return v && Object.keys(v.ratings||{}).length>0;
